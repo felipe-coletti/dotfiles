@@ -1,4 +1,4 @@
-@import url(".config/colors/palette.css");
+@import url("../colors/palette.css");
 
 * {
     all:unset;
