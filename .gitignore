@@ -1,7 +1,3 @@
-# Symlinks criados localmente (não versionar)
-.config/wofi/style.css
-.config/waybar/style.css
-
 # Arquivos de backup e temporários
 *.bak
 *.swp

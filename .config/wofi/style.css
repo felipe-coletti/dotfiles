@@ -1,0 +1,56 @@
+@import url(".config/colors/palette.css");
+
+* {
+    all:unset;
+    font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", sans-serif;
+    font-size: 13px;
+}
+
+window {
+    margin: 0;
+    border: 1px solid @border;
+    background-color: @bg;
+    border-radius: 4px;
+}
+
+#input {
+    margin: 4px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: @bg_alt;
+    color: @text;
+    padding: 8px;
+    font-size: 14px;
+}
+
+#input:focus { border-color: @accent; }
+#inner-box, #outer-box, #scroll {
+    margin: 0;
+    border: none;
+    background-color: @bg;
+}
+
+#text {
+    margin: 4px;
+    border: none;
+    color: @text;
+}
+
+#entry {
+    margin: 2px;
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+#entry:selected {
+    background-color: @accent;
+}
+
+#entry:selected #text {
+    color: #ffffff;
+}
+
+#img {
+    margin: 4px;
+}
