@@ -69,3 +69,14 @@ window#waybar {
     color: @accent;
 }
 
+tooltip {
+    background-color: transparent;
+    border: none;
+}
+
+tooltip label {
+    background-color: alpha(@bg_hover, 0.99);
+    color: @text;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
