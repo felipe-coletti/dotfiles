@@ -8,49 +8,86 @@
 
 window {
     margin: 0;
-    border: 1px solid @border;
-    background-color: @bg;
+    background-color: alpha(@bg, .99);
     border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 #input {
-    margin: 4px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background-color: @bg_alt;
+    margin: 10px 12px;
+    border: none;
+    border-bottom: 1px solid @border;
+    border-radius: 0;
+    background-color: transparent;
     color: @text;
-    padding: 8px;
+    caret-color: @text;
+    padding: 8px 0;
     font-size: 14px;
 }
 
-#input:focus { border-color: @accent; }
+#input image {
+    color: @text;
+    padding-right: 8px;
+}
+
+#input:focus {
+    border-bottom-color: @text;
+}
+
 #inner-box, #outer-box, #scroll {
     margin: 0;
     border: none;
-    background-color: @bg;
+    background-color: transparent;
+}
+
+#scroll scrollbar {
+    background-color: transparent;
+}
+
+#scroll slider {
+    background-color: @border;
+    border-radius: 2px;
+    margin: 2px;
 }
 
 #text {
-    margin: 4px;
+    margin: 6px 12px;
     border: none;
-    color: @text;
+    color: @text_dim;
+    line-height: 1.4;
 }
 
 #entry {
-    margin: 2px;
+    margin: 2px 10px;
     border: none;
     border-radius: 4px;
     background-color: transparent;
 }
 
 #entry:selected {
-    background-color: @accent;
+    background-color: @bg_hover;
 }
 
 #entry:selected #text {
-    color: #ffffff;
+    color: @text;
 }
 
 #img {
     margin: 4px;
+}
+
+#scroll {
+    border: none;
+}
+
+#scroll slider {
+    background-color: @bg_hover;
+    border-radius: 3px;
+    min-width: 6px;
+}
+
+#scroll button {
+    min-height: 12px;
+    min-width: 12px;
+    background-color: @bg_hover;
 }
