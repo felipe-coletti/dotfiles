@@ -19,6 +19,13 @@ hl.config({
     },
 })
 
+-- Teclado interno do ThinkPad
+hl.device({
+    name = "at-translated-set-2-keyboard",
+    kb_layout = "br",
+    kb_variant = "thinkpad",
+})
+
 -- Gestos: 3 dedos horizontal = trocar workspace
 hl.gesture({
     fingers   = 3,

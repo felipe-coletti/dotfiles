@@ -30,7 +30,7 @@ window#waybar {
 #workspaces button {
     background: transparent;
     color: @text_dim;
-    padding: 6px 8px;
+    padding: 6px 12px;
     margin: 0 2px;
     border: none;
     border-radius: 0;
@@ -61,10 +61,11 @@ window#waybar {
     font-weight: bold;
 }
 
-#pulseaudio, #battery, #clock {
+#network, #bluetooth, #pulseaudio, #custom-brightness, #battery, #clock {
     margin-right: 10px;    
 }
 
 #pulseaudio.muted, #battery.warning, #battery.critical {
     color: @accent;
 }
+
