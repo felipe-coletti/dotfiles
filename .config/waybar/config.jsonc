@@ -87,8 +87,8 @@
     },
 
     "clock": {
-        "format": "{:%a, %d %b %Y • :%H:%M}",
-        "format-alt": "{:%a, %d %b %Y • :%I:%M %p}",
+        "format": "{:%a, %d %b %Y • %H:%M}",
+        "format-alt": "{:%a, %d %b %Y • %I:%M %p}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "tooltip": true,
         "calendar": {
