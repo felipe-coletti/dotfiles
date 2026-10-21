@@ -1,4 +1,5 @@
 local mod = "SUPER"
+local home = os.getenv("HOME")
 
 -- ─── Programas ──────────────────────────────────────────────
 hl.bind(mod .. " + Return",    hl.dsp.exec_cmd(terminal))
@@ -6,7 +7,14 @@ hl.bind(mod .. " + D",         hl.dsp.exec_cmd(menu))
 hl.bind(mod .. " + E",         hl.dsp.exec_cmd(fileManager))
 
 -- ─── Janelas ────────────────────────────────────────────────
-hl.bind(mod .. " + Q",         hl.dsp.window.close())
+hl.bind(mod .. " + Q", function()
+    local w = hl.get_active_window()
+    if w then
+        hl.dispatch(hl.dsp.window.close())
+    else
+        hl.exec_cmd(home .. "/.config/wofi/scripts/powermenu.sh")
+    end
+end)
 hl.bind(mod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + P",         hl.dsp.window.pseudo())
 hl.bind(mod .. " + J",         hl.dsp.layout("togglesplit"))   -- dwindle only
