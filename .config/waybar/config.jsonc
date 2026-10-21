@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "position": "bottom",
+    "position": "top",
     "height": 36,
     "spacing": 8,
     "margin": 0,
@@ -34,6 +34,15 @@
         "separate-outputs": true
     },
 
+    "network": {
+        "format-wifi": "󰤨 ",
+        "format-ethernet": "󰈢 {ifname}",
+        "format-linked": "󰈁 {ifname} (No IP)",
+        "format-disconnected": "󰤭",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "on-click": "nmcli"
+    },
+
     "bluetooth": {
         "format": "󰂨",
         "format-disabled": "",
@@ -42,14 +51,6 @@
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click": "bluetoothctl"
-    },
-
-    "network": {
-        "format-wifi": "󰤨 ",
-        "format-ethernet": "󰈢 {ifname}",
-        "format-disconnected": "󰤭",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-        "on-click": "nmcli"
     },
 
     "pulseaudio": {
@@ -61,7 +62,7 @@
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "scroll-step": 5,
-        "tooltip": false
+        "tooltip-fornmat": "Audio\nScroll: adjust\nLeft click: Mute/Unmute"
     },
 
     "custom/brightness": {
@@ -86,7 +87,8 @@
     },
 
     "clock": {
-        "format": "{:%H:%M}",
+        "format": "{:%a, %d %b %Y • :%H:%M}",
+        "format-alt": "{:%a, %d %b %Y • :%I:%M %p}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "tooltip": true,
         "calendar": {
