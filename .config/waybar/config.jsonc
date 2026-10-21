@@ -62,7 +62,7 @@
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "scroll-step": 5,
-        "tooltip-fornmat": "Audio\nScroll: adjust\nLeft click: Mute/Unmute"
+        "tooltip-format": "{desc}\nScroll: adjust\nLeft click: Mute/Unmute"
     },
 
     "custom/brightness": {
