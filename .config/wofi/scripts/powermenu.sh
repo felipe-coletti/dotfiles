@@ -1,11 +1,25 @@
 #!/bin/bash
 
-shutdown="Desligar"
-reboot="Reiniciar"
-lock="Bloquear"
-logout="Sair"
+lang="${LC_ALL:-${LC_MESSAGES:-$LANG}}"
 
-chosen=$(printf '%s\n' "$shutdown" "$reboot" "$lock" "$logout" | wofi --dmenu --prompt "Buscar" --width 300 --height 200 -i)
+case "$lang" in
+  pt*)
+    shutdown="Desligar"
+    reboot="Reiniciar"
+    lock="Bloquear"
+    logout="Sair"
+    prompt="Buscar"
+    ;;
+  *)
+    shutdown="Shut down"
+    reboot="Reboot"
+    lock="Lock"
+    logout="Log out"
+    prompt="Search"
+    ;;
+esac
+
+chosen=$(printf '%s\n' "$shutdown" "$reboot" "$lock" "$logout" | wofi --dmenu --prompt "$prompt" --width 300 --height 200 -i)
 
 case "$chosen" in
   "$shutdown") systemctl poweroff ;;

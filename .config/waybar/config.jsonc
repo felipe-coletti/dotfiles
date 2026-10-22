@@ -5,6 +5,9 @@
     "spacing": 8,
     "margin": 0,
 
+    // Textos traduzidos: i18n/<idioma>.jsonc, selecionado pelo launch.sh
+    "include": ["~/.config/waybar/i18n/current.jsonc"],
+
     "modules-left": ["custom/shutdown", "custom/vseparator", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
     "modules-right": ["network", "bluetooth", "pulseaudio", "custom/brightness", "battery", "clock"],
@@ -37,7 +40,6 @@
     "network": {
         "format-wifi": "󰤨 ",
         "format-ethernet": "󰈢 {ifname}",
-        "format-linked": "󰈁 {ifname} (No IP)",
         "format-disconnected": "󰤭",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "on-click": "nmcli"
@@ -55,25 +57,22 @@
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "🔇 Muted",
         "format-icons": {
-            "headphone": "🎧",
-            "default": ["🔈", "🔉", "🔊"]
+            "headphone": "󰋋",
+            "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "scroll-step": 5,
-        "tooltip-format": "{desc}\nScroll: adjust\nLeft click: Mute/Unmute"
+        "scroll-step": 5
     },
 
     "custom/brightness": {
-        "format": "☼ {}%",
+        "format": "󰃠 {}%",
         "signal": 8,
         "exec": "$HOME/.config/waybar/scripts/brightness-per-monitor.sh get",
         "on-scroll-up": "$HOME/.config/waybar/scripts/brightness-per-monitor.sh up",
         "on-scroll-down": "$HOME/.config/waybar/scripts/brightness-per-monitor.sh down",
         "on-click": "$HOME/.config/waybar/scripts/brightness-per-monitor.sh left_click",
-        "on-click-right": "$HOME/.config/waybar/scripts/brightness-per-monitor.sh right_click",
-        "tooltip-format": "Monitor Brightness\nScroll: adjust\nLeft click: 100%\nRight click: 0%"
+        "on-click-right": "$HOME/.config/waybar/scripts/brightness-per-monitor.sh right_click"
     },
 
     "battery": {

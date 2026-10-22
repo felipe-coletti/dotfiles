@@ -7,7 +7,7 @@ hl.config({
         kb_options = "",
         kb_rules   = "",
 
-        -- Foco segue o mouse (1 = ao clicar)
+        -- Foco segue o mouse (1 = segue o cursor)
         follow_mouse = 1,
 
         -- Sensibilidade do mouse: -1.0 a 1.0 (0 = padrão)
