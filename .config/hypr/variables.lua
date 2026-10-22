@@ -1,3 +1,6 @@
+-- ─── Caminhos ────────────────────────────────────────────────
+local home = os.getenv("HOME")
+
 -- ─── Programas ───────────────────────────────────────────────
 terminal    = "foot"
 fileManager = "thunar"

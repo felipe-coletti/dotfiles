@@ -1,4 +1,4 @@
-require("variables")   -- programas, cores, gaps
+require("variables")   -- caminhos, programas, layouts
 require("input")       -- teclado, mouse, touchpad
 require("animations")  -- curvas e animações
 require("appearance")  -- decoração

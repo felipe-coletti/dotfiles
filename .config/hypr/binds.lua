@@ -1,5 +1,4 @@
 local mod = "SUPER"
-local home = os.getenv("HOME")
 
 -- ─── Programas ──────────────────────────────────────────────
 hl.bind(mod .. " + Return",    hl.dsp.exec_cmd(terminal))
