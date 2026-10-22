@@ -87,14 +87,22 @@
     },
 
     "clock": {
-        "format": "{:%a, %d %b %Y • %H:%M}",
-        "format-alt": "{:%a, %d %b %Y • %I:%M %p}",
+        "format": "{:L%a, %d %b • %H:%M}",
+        "format-alt": "{:%H:%M}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "tooltip": true,
         "calendar": {
+            "mode": "month",
+            "on-scroll": 1,
             "format": {
                 "today": "<b>{}</b>"
             }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down",
+            "on-click-middle": "shift_reset"
         }
     }
 }
