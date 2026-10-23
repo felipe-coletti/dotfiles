@@ -1,5 +1,5 @@
 -- ─── Caminhos ────────────────────────────────────────────────
-local home = os.getenv("HOME")
+home = os.getenv("HOME")
 
 -- ─── Programas ───────────────────────────────────────────────
 terminal    = "foot"
