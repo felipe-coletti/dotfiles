@@ -24,6 +24,7 @@ readonly PKGS=(
     playerctl brightnessctl wireplumber pipewire
     ttf-jetbrains-mono-nerd ttf-font-awesome git rsync
     papirus-icon-theme noto-fonts-emoji
+    hyprlock qt5-wayland qt6-wayland dconf
 )
 
 # ─── 1. Verificar pré-requisitos ─────────────────────────────
@@ -67,7 +68,7 @@ backup_existing() {
     section "Backup de configs existentes"
 
     local has_backup=false
-    for dir in hypr waybar foot mako wofi hyprpaper colors dotfiles; do
+    for dir in hypr waybar foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
         local target="$CONFIG_DIR/$dir"
         if [[ -e "$target" ]]; then
             mkdir -p "$BACKUP_DIR"
@@ -90,14 +91,19 @@ copy_config() {
 
     mkdir -p "$CONFIG_DIR"
 
-    for dir in hypr waybar foot mako wofi hyprpaper colors dotfiles; do
+    for dir in hypr waybar foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
         local src="$REPO_DIR/.config/$dir"
         local dst="$CONFIG_DIR/$dir"
 
         if [[ -d "$src" ]]; then
             # Sincroniza no lugar (sem apagar a pasta) para o autoreload do
-            # Hyprland nunca encontrar a config ausente no meio da cópia
-            rsync -a --delete --exclude "i18n/current.jsonc" "$src/" "$dst/"
+            # Hyprland nunca encontrar a config ausente no meio da cópia.
+            # Ficam de fora arquivos gerados ou pessoais (idioma do waybar,
+            # favoritos do Thunar/GTK)
+            rsync -a --delete \
+                --exclude "i18n/current.jsonc" \
+                --exclude "/bookmarks" \
+                "$src/" "$dst/"
             ok "Copiado: $dir"
         else
             warn "Pasta não encontrada: $src"
@@ -111,6 +117,19 @@ post_install() {
 
     chmod +x "$REPO_DIR/install.sh"
     mkdir -p "$HOME/Pictures/screenshots"
+
+    # Tema GTK: no Wayland os apps leem o gsettings, não o settings.ini
+    if command -v gsettings &>/dev/null; then
+        local iface="org.gnome.desktop.interface"
+        if gsettings set "$iface" gtk-theme    "Adwaita-dark" &&
+           gsettings set "$iface" color-scheme "prefer-dark" &&
+           gsettings set "$iface" icon-theme   "Papirus-Dark" &&
+           gsettings set "$iface" font-name    "JetBrainsMono Nerd Font 10"; then
+            ok "Tema GTK aplicado."
+        else
+            warn "Não foi possível aplicar o tema GTK via gsettings."
+        fi
+    fi
 
     # Aplica a config na sessão atual, se o Hyprland estiver rodando
     if [[ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then
