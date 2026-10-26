@@ -111,7 +111,23 @@ copy_config() {
     done
 }
 
-# ─── 5. Ajustes finais ──────────────────────────────────────
+# ─── 5. Tema do SDDM ────────────────────────────────────────
+install_sddm_theme() {
+    section "Tema do SDDM"
+
+    if ! command -v sddm &>/dev/null; then
+        warn "SDDM não encontrado; tema não instalado."
+        return
+    fi
+
+    sudo rsync -a --delete "$REPO_DIR/sddm/dotfiles/" /usr/share/sddm/themes/dotfiles/
+    sudo mkdir -p /etc/sddm.conf.d
+    printf '[Theme]\nCurrent=dotfiles\n' | sudo tee /etc/sddm.conf.d/theme.conf >/dev/null
+
+    ok "Tema do SDDM instalado e ativado."
+}
+
+# ─── 6. Ajustes finais ──────────────────────────────────────
 post_install() {
     section "Ajustes finais"
 
@@ -142,7 +158,7 @@ post_install() {
     ok "Instalação concluída."
 }
 
-# ─── 6. Resumo ──────────────────────────────────────────────
+# ─── 7. Resumo ──────────────────────────────────────────────
 summary() {
     log "\n${GREEN}════════════════════════════════════${NC}"
     log "${GREEN}  Dotfiles instalados com sucesso!  ${NC}"
@@ -166,6 +182,7 @@ main() {
     install_packages
     backup_existing
     copy_config
+    install_sddm_theme
     post_install
     summary
 }
