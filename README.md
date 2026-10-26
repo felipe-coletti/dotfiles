@@ -26,8 +26,8 @@ cd ~/.dotfiles
 
 Os textos dos menus, da waybar e da roda de cores seguem o idioma do sistema. Os idiomas disponíveis são os 10 mais falados do mundo:
 
-| Idioma | Código |
-| --- | --- |
+| Idioma | Nome nativo | Código |
+| --- | --- | --- |
 | Inglês | English | `en_US` |
 | Mandarim (simplificado) | 中文（简体） | `zh_CN` |
 | Hindi | हिन्दी | `hi_IN` |
