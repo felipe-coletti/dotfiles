@@ -25,6 +25,7 @@ readonly PKGS=(
     ttf-jetbrains-mono-nerd ttf-font-awesome git rsync
     papirus-icon-theme noto-fonts-emoji
     hyprlock qt5-wayland qt6-wayland dconf
+    gtk3 xdg-user-dirs
 )
 
 # ─── 1. Verificar pré-requisitos ─────────────────────────────
@@ -235,6 +236,7 @@ main() {
     install_packages
     backup_existing
     copy_config
+    setup_user_dirs
     install_sddm_theme
     post_install
     summary
