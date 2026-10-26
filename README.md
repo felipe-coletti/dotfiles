@@ -28,15 +28,15 @@ Os textos dos menus, da waybar e da roda de cores seguem o idioma do sistema. Os
 
 | Idioma | Código |
 | --- | --- |
-| Inglês | `en_US` |
-| Mandarim (simplificado) | `zh_CN` |
-| Hindi | `hi_IN` |
-| Espanhol | `es_ES` |
-| Árabe | `ar_SA` |
-| Francês | `fr_FR` |
-| Bengali | `bn_BD` |
-| Português | `pt_BR` |
-| Russo | `ru_RU` |
-| Indonésio | `id_ID` |
+| Inglês | English | `en_US` |
+| Mandarim (simplificado) | 中文（简体） | `zh_CN` |
+| Hindi | हिन्दी | `hi_IN` |
+| Espanhol | Español | `es_ES` |
+| Árabe | العربية | `ar_SA` |
+| Francês | Français | `fr_FR` |
+| Bengali | বাংলা | `bn_BD` |
+| Português | Português | `pt_BR` |
+| Russo | Русский | `ru_RU` |
+| Indonésio | Bahasa Indonesia | `id_ID` |
 
 Outras variantes de um idioma usam a tradução dele (por exemplo, `es_MX` usa `es_ES`, e `pt_PT` usa `pt_BR`). Idiomas sem tradução usam o inglês.
