@@ -1,0 +1,9 @@
+[SddmGreeterTheme]
+Name=Dotfiles
+Description=Tela de login com o mesmo visual do hyprlock
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+Theme-Id=dotfiles
+Theme-API=2.0
+QtVersion=6
