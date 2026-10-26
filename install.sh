@@ -111,7 +111,60 @@ copy_config() {
     done
 }
 
-# ─── 5. Tema do SDDM ────────────────────────────────────────
+# ─── 5. Pastas pessoais no idioma do sistema ────────────────
+setup_user_dirs() {
+    section "Pastas pessoais no idioma do sistema"
+
+    if ! command -v xdg-user-dirs-update &>/dev/null; then
+        warn "xdg-user-dirs não encontrado."
+        return
+    fi
+
+    # Nomes padrão em inglês, usados quando a pasta ainda não está configurada
+    local -A english=(
+        [DESKTOP]=Desktop [DOWNLOAD]=Downloads [TEMPLATES]=Templates
+        [PUBLICSHARE]=Public [DOCUMENTS]=Documents [MUSIC]=Music
+        [PICTURES]=Pictures [VIDEOS]=Videos
+    )
+
+    # Nomes no idioma do sistema
+    # (--dummy-output só gera a lista, sem criar nem mover nada)
+    local localized
+    localized=$(mktemp)
+    xdg-user-dirs-update --force --dummy-output "$localized" >/dev/null
+
+    local pattern='^XDG_([A-Z]+)_DIR="\$HOME/(.*)"$'
+    local line key new old
+    while IFS= read -r line; do
+        [[ "$line" =~ $pattern ]] || continue
+        key="${BASH_REMATCH[1]}"
+        new="$HOME/${BASH_REMATCH[2]}"
+
+        # Pasta atual: a configurada ou, sem configuração, a padrão em inglês
+        old=$(xdg-user-dir "$key")
+        if [[ "$old" == "$HOME" && -n "${english[$key]:-}" ]]; then
+            old="$HOME/${english[$key]}"
+        fi
+
+        if [[ "$old" != "$new" && -d "$old" ]]; then
+            if [[ -e "$new" ]]; then
+                warn "Mantida: ${old#"$HOME/"} (${new#"$HOME/"} já existe)"
+                xdg-user-dirs-update --set "$key" "$old"
+                continue
+            fi
+            mv "$old" "$new"
+            ok "Renomeada: ${old#"$HOME/"} → ${new#"$HOME/"}"
+        fi
+
+        mkdir -p "$new"
+        xdg-user-dirs-update --set "$key" "$new"
+    done < "$localized"
+
+    rm -f "$localized"
+    ok "Pastas pessoais configuradas."
+}
+
+# ─── 6. Tema do SDDM ────────────────────────────────────────
 install_sddm_theme() {
     section "Tema do SDDM"
 
@@ -127,7 +180,7 @@ install_sddm_theme() {
     ok "Tema do SDDM instalado e ativado."
 }
 
-# ─── 6. Ajustes finais ──────────────────────────────────────
+# ─── 7. Ajustes finais ──────────────────────────────────────
 post_install() {
     section "Ajustes finais"
 
@@ -158,7 +211,7 @@ post_install() {
     ok "Instalação concluída."
 }
 
-# ─── 7. Resumo ──────────────────────────────────────────────
+# ─── 8. Resumo ──────────────────────────────────────────────
 summary() {
     log "\n${GREEN}════════════════════════════════════${NC}"
     log "${GREEN}  Dotfiles instalados com sucesso!  ${NC}"
