@@ -5,11 +5,11 @@ Rectangle {
     id: root
 
     // Cores da paleta (.config/colors/palette.css)
-    readonly property color bgAlt:      "#2a2a2a"
+    readonly property color bgAlt:       "#2a2a2a"
     readonly property color borderColor: "#3a3a3a"
-    readonly property color textColor:  "#d4d4d4"
-    readonly property color textDim:    "#808080"
-    readonly property color accent:     "#c0392b"
+    readonly property color textColor:   "#d4d4d4"
+    readonly property color textDim:     "#808080"
+    readonly property color accent:      "#c0392b"
     readonly property string fontFamily: "JetBrainsMono Nerd Font"
 
     // Usuário fixo (último logado), sem troca de usuário, como no hyprlock
@@ -58,7 +58,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: -50
-        text: Qt.formatDate(root.now, "dddd, dd MMMM")
+        text: Qt.formatDate(root.now, "dddd, dd MMMM yyyy")
         color: root.textDim
         font.family: root.fontFamily
         font.pointSize: 14
