@@ -92,6 +92,7 @@ step=$((max * STEP / 100))
 
 case "$COMMAND" in
     "get")
+        [ "$current" = "?" ] && exit 0
         percent=$((current * 100 / max))
         echo "$percent"
         ;;
