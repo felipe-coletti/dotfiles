@@ -3,7 +3,6 @@
     "position": "top",
     "spacing": 15,
     "margin": 0,
-    "padding": 0,
 
     // Textos traduzidos: i18n/<idioma>.jsonc, selecionado pelo launch.sh
     "include": ["~/.config/waybar/i18n/current.jsonc"],
@@ -41,11 +40,11 @@
     },
 
     "network": {
-        "format-wifi": "󰤨 ",
-        "format-ethernet": "󰈢 {ifname}",
+        "format-wifi": "󰤨",
+        "format-ethernet": "󰈀 {ifname}",
         "format-disconnected": "󰤭",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-        "on-click": "nmcli"
+        "on-click": "foot -e nmtui"
     },
 
     "bluetooth": {
@@ -82,7 +81,8 @@
 
     "battery": {
         "format": "{icon} {capacity}%",
-        "format-icons": ["", "", "", "", ""],
+        "format-icons": ["󰂎", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
+        "format-charging": "󰂄 {capacity}%",
         "states": {
             "warning": 20,
             "critical": 10
