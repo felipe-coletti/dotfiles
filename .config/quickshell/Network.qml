@@ -22,6 +22,8 @@ BarItem {
 
     Process {
         id: check
+        // In English: nmcli translates values like "yes" and "connected"
+        environment: ({ LC_ALL: "C" })
         command: ["sh", "-c",
             "nmcli -t -f TYPE,STATE,DEVICE device; echo --; " +
             "nmcli -t -f ACTIVE,SIGNAL,SSID device wifi list --rescan no"]
