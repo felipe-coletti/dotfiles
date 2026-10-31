@@ -16,9 +16,11 @@ WlSessionLockSurface {
         precision: SystemClock.Minutes
     }
 
-    // Hides the mouse cursor
+    // Hides the mouse cursor. hoverEnabled: without it, the cursor shape is
+    // only applied after a click, so the cursor stayed while just moving
     MouseArea {
         anchors.fill: parent
+        hoverEnabled: true
         cursorShape: Qt.BlankCursor
     }
 
