@@ -20,7 +20,7 @@ readonly BACKUP_DIR="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 readonly CONFIG_DIR="$HOME/.config"
 
 readonly PKGS=(
-    hyprland foot thunar hyprpaper libnotify
+    hyprland foot thunar libnotify
     playerctl brightnessctl wireplumber pipewire
     ttf-jetbrains-mono-nerd git rsync
     papirus-icon-theme noto-fonts-emoji
@@ -93,7 +93,7 @@ backup_existing() {
     section "Backup de configs existentes"
 
     local has_backup=false
-    for dir in hypr quickshell foot hyprpaper colors gtk-3.0 gtk-4.0 xdg-desktop-portal; do
+    for dir in hypr quickshell foot colors gtk-3.0 gtk-4.0 xdg-desktop-portal; do
         local target="$CONFIG_DIR/$dir"
         if [[ -e "$target" ]]; then
             mkdir -p "$BACKUP_DIR"
@@ -116,7 +116,7 @@ copy_config() {
 
     mkdir -p "$CONFIG_DIR"
 
-    for dir in hypr quickshell foot hyprpaper colors gtk-3.0 gtk-4.0 xdg-desktop-portal; do
+    for dir in hypr quickshell foot colors gtk-3.0 gtk-4.0 xdg-desktop-portal; do
         local src="$REPO_DIR/.config/$dir"
         local dst="$CONFIG_DIR/$dir"
 
@@ -187,7 +187,25 @@ setup_user_dirs() {
     ok "Pastas pessoais configuradas."
 }
 
-# ─── 6. Tema do SDDM ────────────────────────────────────────
+# ─── 6. Wallpapers ──────────────────────────────────────────
+# Vão para a pasta Wallpapers dentro da pasta de imagens do idioma do sistema
+# (Imagens, Pictures…), onde o Quickshell os procura. Sem --delete, para não
+# apagar os wallpapers que você adicionar lá
+install_wallpapers() {
+    section "Wallpapers"
+
+    local pictures
+    pictures=$(xdg-user-dir PICTURES 2>/dev/null || true)
+    if [[ -z "$pictures" || "$pictures" == "$HOME" ]]; then
+        pictures="$HOME/Pictures"
+    fi
+
+    mkdir -p "$pictures/Wallpapers"
+    rsync -a "$REPO_DIR/wallpapers/" "$pictures/Wallpapers/"
+    ok "Wallpapers copiados para ${pictures#"$HOME/"}/Wallpapers."
+}
+
+# ─── 7. Tema do SDDM ────────────────────────────────────────
 install_sddm_theme() {
     section "Tema do SDDM"
 
@@ -203,7 +221,7 @@ install_sddm_theme() {
     ok "Tema do SDDM instalado e ativado."
 }
 
-# ─── 7. Ajustes finais ──────────────────────────────────────
+# ─── 8. Ajustes finais ──────────────────────────────────────
 post_install() {
     section "Ajustes finais"
 
@@ -238,7 +256,7 @@ post_install() {
     ok "Instalação concluída."
 }
 
-# ─── 8. Resumo ──────────────────────────────────────────────
+# ─── 9. Resumo ──────────────────────────────────────────────
 summary() {
     log "\n${GREEN}════════════════════════════════════${NC}"
     log "${GREEN}  Dotfiles instalados com sucesso!  ${NC}"
@@ -263,6 +281,7 @@ main() {
     backup_existing
     copy_config
     setup_user_dirs
+    install_wallpapers
     install_sddm_theme
     post_install
     summary

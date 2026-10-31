@@ -42,8 +42,11 @@ hl.config({
 
     -- Comportamento geral
     misc = {
-        force_default_wallpaper = -1,
-        disable_hyprland_logo   = false,
+        -- O wallpaper vem do Quickshell. Antes de ele abrir, só a cor de
+        -- fundo da paleta, sem o wallpaper e o logo padrão do Hyprland
+        force_default_wallpaper = 0,
+        disable_hyprland_logo   = true,
+        background_color        = 0xff1e1e1e,
         -- Se o Quickshell parar com a tela bloqueada, abri-lo de novo
         -- retoma a tela de bloqueio
         allow_session_lock_restore = true,

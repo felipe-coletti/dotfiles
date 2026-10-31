@@ -24,7 +24,13 @@ cd ~/.dotfiles
 
 ## Quickshell
 
-Nesta branch, a barra, o lançador de apps, o menu de energia, as notificações, a tela de bloqueio e o indicador de volume e brilho são feitos no [Quickshell](https://quickshell.org), no lugar da waybar, do wofi, do mako e do hyprlock. Ele fica no AUR, e o instalador usa o `yay` ou o `paru` para instalá-lo; sem um deles, instale o Quickshell à mão antes de rodar o instalador.
+A barra, o wallpaper, o lançador de apps, o menu de energia, as notificações, a tela de bloqueio e o indicador de volume e brilho são feitos no [Quickshell](https://quickshell.org), no lugar da waybar, do hyprpaper, do wofi, do mako e do hyprlock. Ele fica no AUR, e o instalador usa o `yay` ou o `paru` para instalá-lo; sem um deles, instale o Quickshell à mão antes de rodar o instalador.
+
+## Wallpaper
+
+Os wallpapers ficam na pasta `wallpapers/` do repositório. O instalador os copia para a pasta `Wallpapers` dentro da sua pasta de imagens (`~/Imagens/Wallpapers` em português, `~/Pictures/Wallpapers` em inglês), sem apagar os que você já tiver lá.
+
+Para usar outro wallpaper, coloque a imagem nessa pasta e troque o nome do arquivo em `~/.config/quickshell/Wallpaper.qml` (a linha `file`). Depois, reinicie o Quickshell.
 
 ## Idiomas
 
