@@ -20,7 +20,7 @@ readonly BACKUP_DIR="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 readonly CONFIG_DIR="$HOME/.config"
 
 readonly PKGS=(
-    hyprland waybar foot thunar wofi mako hyprpaper
+    hyprland foot thunar wofi mako hyprpaper
     playerctl brightnessctl wireplumber pipewire
     ttf-jetbrains-mono-nerd ttf-font-awesome git rsync
     papirus-icon-theme noto-fonts-emoji
@@ -63,6 +63,27 @@ install_packages() {
     else
         ok "Todos os pacotes já estão instalados."
     fi
+
+    install_quickshell
+}
+
+# A barra é feita no Quickshell, que fica no AUR: usa o pacman se ele já
+# estiver nos repositórios oficiais, senão o yay ou o paru
+install_quickshell() {
+    if pacman -Qi quickshell &>/dev/null; then
+        ok "Quickshell já está instalado."
+    elif pacman -Si quickshell &>/dev/null; then
+        sudo pacman -S --needed --noconfirm quickshell
+        ok "Quickshell instalado."
+    elif command -v yay &>/dev/null; then
+        yay -S --needed --noconfirm quickshell
+        ok "Quickshell instalado (AUR)."
+    elif command -v paru &>/dev/null; then
+        paru -S --needed --noconfirm quickshell
+        ok "Quickshell instalado (AUR)."
+    else
+        warn "Quickshell não encontrado: instale pelo AUR (por exemplo, com o yay) para a barra aparecer."
+    fi
 }
 
 # ─── 3. Backup de configs existentes ────────────────────────
@@ -70,7 +91,7 @@ backup_existing() {
     section "Backup de configs existentes"
 
     local has_backup=false
-    for dir in hypr waybar foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
         local target="$CONFIG_DIR/$dir"
         if [[ -e "$target" ]]; then
             mkdir -p "$BACKUP_DIR"
@@ -93,17 +114,15 @@ copy_config() {
 
     mkdir -p "$CONFIG_DIR"
 
-    for dir in hypr waybar foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
         local src="$REPO_DIR/.config/$dir"
         local dst="$CONFIG_DIR/$dir"
 
         if [[ -d "$src" ]]; then
             # Sincroniza no lugar (sem apagar a pasta) para o autoreload do
             # Hyprland nunca encontrar a config ausente no meio da cópia.
-            # Ficam de fora arquivos gerados ou pessoais (idioma do waybar,
-            # favoritos do Thunar/GTK)
+            # Ficam de fora arquivos pessoais (favoritos do Thunar/GTK)
             rsync -a --delete \
-                --exclude "i18n/current.jsonc" \
                 --exclude "/bookmarks" \
                 "$src/" "$dst/"
             ok "Copiado: $dir"
@@ -205,9 +224,9 @@ post_install() {
     # Aplica a config na sessão atual, se o Hyprland estiver rodando
     if [[ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then
         hyprctl reload >/dev/null
-        pkill -x waybar || true
-        setsid -f "$CONFIG_DIR/waybar/launch.sh" >/dev/null 2>&1
-        ok "Hyprland e Waybar recarregados."
+        pkill -x quickshell || true
+        setsid -f quickshell >/dev/null 2>&1
+        ok "Hyprland e Quickshell recarregados."
     fi
 
     ok "Instalação concluída."
@@ -221,7 +240,7 @@ summary() {
     log ""
     log "Para testar:"
     log "  ${BLUE}hyprctl reload${NC}"
-    log "  ${BLUE}killall -SIGUSR2 waybar${NC}"
+    log "  ${BLUE}pkill -x quickshell; setsid -f quickshell${NC}"
     log ""
     log "Se algo deu errado, restaure o backup:"
     log "  ${BLUE}cp -r $BACKUP_DIR/* ~/.config/${NC}"

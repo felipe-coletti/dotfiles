@@ -2,14 +2,12 @@
 
 # --- CONFIGURATION ---
 STEP=5
-STATE_FILE_PREFIX="/tmp/waybar_brightness"
+STATE_FILE_PREFIX="/tmp/quickshell_brightness"
 # ---------------------
 
 get_monitor_name() {
     if [ -n "$1" ]; then
         echo "$1"
-    elif [ -n "$WAYBAR_OUTPUT_NAME" ]; then
-        echo "$WAYBAR_OUTPUT_NAME"
     else
         hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name'
     fi
@@ -81,7 +79,6 @@ set_brightness() {
         pkill -f "ddcutil.*setvcp 10" 2>/dev/null
         (ddcutil --display "$display_num" setvcp 10 "$new_brightness") &
     fi
-    pkill -RTMIN+8 waybar
 }   
 
 COMMAND="$1"

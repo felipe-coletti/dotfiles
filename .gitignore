@@ -10,6 +10,3 @@
 # Chaves SSH
 id_rsa*
 id_ed25519*
-
-# Idioma ativo do waybar (gerado pelo launch.sh)
-.config/waybar/i18n/current.jsonc
