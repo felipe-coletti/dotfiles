@@ -10,5 +10,10 @@
 
     "custom/brightness": {
         "tooltip-format": "Luminosité de l'écran\nDéfiler : régler\nClic gauche : 100 %\nClic droit : 0 %"
+    },
+
+    "clock": {
+        "format": "{:L%a %d %b • %H:%M}",
+        "format-alt": "{:%H:%M}"
     }
 }

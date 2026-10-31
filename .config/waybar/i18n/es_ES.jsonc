@@ -10,5 +10,10 @@
 
     "custom/brightness": {
         "tooltip-format": "Brillo del monitor\nDesplazar: ajustar\nClic izquierdo: 100%\nClic derecho: 0%"
+    },
+
+    "clock": {
+        "format": "{:L%a, %d %b • %H:%M}",
+        "format-alt": "{:%H:%M}"
     }
 }

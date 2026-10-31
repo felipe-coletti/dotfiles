@@ -10,5 +10,10 @@
 
     "custom/brightness": {
         "tooltip-format": "মনিটরের উজ্জ্বলতা\nস্ক্রল: ঠিক করুন\nবাম ক্লিক: 100%\nডান ক্লিক: 0%"
+    },
+
+    "clock": {
+        "format": "{:L%a, %d %b • %I:%M %p}",
+        "format-alt": "{:L%I:%M %p}"
     }
 }

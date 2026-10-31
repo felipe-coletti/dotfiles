@@ -20,8 +20,6 @@
     },
 
     "clock": {
-        "format": "{:L%a, %d %b • %H:%M}",
-        "format-alt": "{:%H:%M}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "tooltip": true,
         "calendar": {
