@@ -11,7 +11,7 @@ hl.bind(mod .. " + Q", function()
     if w then
         hl.dispatch(hl.dsp.window.close())
     else
-        hl.exec_cmd(home .. "/.config/wofi/scripts/powermenu.sh")
+        hl.exec_cmd("quickshell ipc call power toggle")
     end
 end)
 hl.bind(mod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
@@ -44,7 +44,7 @@ hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- ─── Sessão ─────────────────────────────────────────────────
-hl.bind(mod .. " + L",         hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mod .. " + L",         hl.dsp.exec_cmd("quickshell ipc call lock lock"))
 
 -- Salva na pasta de imagens do idioma do sistema (Imagens, Pictures…)
 local screenshot = '"$(xdg-user-dir PICTURES)/screenshot-$(date +%Y%m%d-%H%M%S).png"'
@@ -58,8 +58,10 @@ hl.bind("XF86AudioRaiseVolume",   hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAUL
 hl.bind("XF86AudioLowerVolume",   hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      locked)
 hl.bind("XF86AudioMute",          hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     locked)
 hl.bind("XF86AudioMicMute",       hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   locked)
-hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("brightnessctl set 5%+"),                          locked)
-hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("brightnessctl set 5%-"),                          locked)
+-- O brilho não avisa quando muda: as teclas chamam o indicador do Quickshell
+local osd = " && quickshell ipc call osd brightness"
+hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("brightnessctl set 5%+" .. osd),                   locked)
+hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("brightnessctl set 5%-" .. osd),                   locked)
 
 -- Playerctl (requer `playerctl` instalado)
 local lockedNoRepeat = { locked = true }

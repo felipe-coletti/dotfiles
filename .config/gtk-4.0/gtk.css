@@ -1,0 +1,280 @@
+/* Janelas GTK 4 (as de salvar do Brave e de outros navegadores Chromium,
+   e diálogos de apps GTK 4) no mesmo estilo do gtk-3.0/gtk.css: fundo
+   escuro da paleta, linhas finas, seleção e passar o mouse em @bg_hover e
+   o vermelho só para ações destrutivas */
+@import url("../colors/palette.css");
+
+/* ─── Janela e barra de título ───────────────────────────── */
+window.dialog,
+window.dialog:backdrop,
+window.filechooser,
+window.filechooser:backdrop {
+    background-color: @bg;
+    color: @text;
+}
+
+window.dialog headerbar,
+window.dialog headerbar:backdrop,
+window.filechooser headerbar,
+window.filechooser headerbar:backdrop {
+    background-color: @bg;
+    background-image: none;
+    border-bottom: 1px solid @border;
+    box-shadow: none;
+    color: @text;
+}
+
+window.dialog label,
+window.filechooser label {
+    color: @text;
+}
+
+window.dialog label.dim-label,
+window.dialog .dim-label,
+window.filechooser .dim-label {
+    color: @text_dim;
+}
+
+/* ─── Botões ─────────────────────────────────────────────── */
+window.dialog button,
+window.filechooser button {
+    background-color: @bg;
+    background-image: none;
+    border: 1px solid @border;
+    border-radius: 4px;
+    box-shadow: none;
+    color: @text;
+    outline-color: @text;
+}
+
+window.dialog button:hover,
+window.dialog button:checked,
+window.filechooser button:hover,
+window.filechooser button:checked {
+    background-color: @bg_hover;
+}
+
+/* Botões de ação, como no gtk-3.0/gtk.css:
+   - ação principal não destrutiva (Salvar, Criar…): fundo claro e texto
+     escuro; a marcada pelo app ou, nos diálogos comuns, a do Enter
+   - nos avisos (.message), o botão do Enter ganha só a borda clara
+   - ações destrutivas em vermelho (@negative), logo abaixo */
+window.dialog.message button.default {
+    border-color: @text;
+}
+
+window.dialog button.suggested-action,
+window.dialog:not(.message) button.default,
+window.filechooser button.suggested-action,
+window.filechooser button.default {
+    background-color: @text;
+    border-color: @text;
+}
+
+window.dialog button.suggested-action:hover,
+window.dialog:not(.message) button.default:hover,
+window.filechooser button.suggested-action:hover,
+window.filechooser button.default:hover {
+    background-color: alpha(@text, 0.85);
+}
+
+window.dialog button.suggested-action label,
+window.dialog:not(.message) button.default label,
+window.filechooser button.suggested-action label,
+window.filechooser button.default label {
+    color: @bg;
+}
+
+window.dialog button.destructive-action {
+    background-color: @negative;
+    border-color: @negative;
+}
+
+window.dialog button.destructive-action:hover {
+    background-color: @negative_hover;
+    border-color: @negative_hover;
+}
+
+window.dialog button.destructive-action label {
+    color: @text;
+}
+
+window.dialog button:disabled,
+window.filechooser button:disabled {
+    opacity: 0.4;
+}
+
+/* Botões só com ícone, sem caixa, como na barra de ferramentas do Thunar */
+window.filechooser button.image-button,
+window.filechooser pathbar button,
+window.filechooser placessidebar button {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+window.filechooser button.image-button:hover,
+window.filechooser button.image-button:checked,
+window.filechooser pathbar button:hover,
+window.filechooser pathbar button:checked {
+    background-color: @bg_hover;
+}
+
+/* ─── Campos de texto ────────────────────────────────────── */
+window.dialog entry,
+window.filechooser entry {
+    background-color: @bg;
+    background-image: none;
+    border: 1px solid @border;
+    border-radius: 4px;
+    box-shadow: none;
+    caret-color: @text;
+    color: @text;
+    outline: none;
+}
+
+window.dialog entry:focus-within,
+window.filechooser entry:focus-within {
+    border-color: @text;
+}
+
+window.dialog selection,
+window.dialog text selection,
+window.filechooser selection,
+window.filechooser text selection {
+    background-color: @bg_hover;
+    color: @text;
+}
+
+/* ─── Lateral (Pasta pessoal, Downloads…) ────────────────── */
+window.filechooser placessidebar,
+window.filechooser placessidebar list,
+window.filechooser .navigation-sidebar {
+    background-color: @bg;
+    color: @text;
+}
+
+window.filechooser paned > separator {
+    background-color: transparent;
+    background-image: none;
+    border-left: 1px solid @border;
+    min-width: 1px;
+}
+
+window.filechooser placessidebar row {
+    border-radius: 4px;
+    color: @text;
+}
+
+window.filechooser placessidebar row:hover {
+    background-color: @bg_hover;
+}
+
+window.filechooser placessidebar row:selected,
+window.filechooser placessidebar row:selected:hover {
+    background-color: @bg_hover;
+    color: @text;
+}
+
+window.filechooser placessidebar separator {
+    background-color: @border;
+}
+
+/* ─── Lista de arquivos ──────────────────────────────────── */
+window.filechooser columnview,
+window.filechooser columnview > listview,
+window.filechooser listview,
+window.filechooser gridview,
+window.filechooser placesview {
+    background-color: @bg;
+    color: @text;
+}
+
+window.filechooser columnview > listview > row:hover,
+window.filechooser listview > row:hover {
+    background-color: alpha(@bg_hover, 0.5);
+}
+
+window.filechooser columnview > listview > row:selected,
+window.filechooser listview > row:selected,
+window.filechooser gridview > child:selected {
+    background-color: @bg_hover;
+    color: @text;
+}
+
+/* Cabeçalhos das colunas (Nome, Tamanho…), iguais com e sem foco */
+window.filechooser columnview > header > button,
+window.filechooser columnview > header > button:backdrop {
+    background-color: @bg;
+    background-image: none;
+    border: none;
+    border-bottom: 1px solid @border;
+    border-radius: 0;
+    color: @text_dim;
+}
+
+window.filechooser columnview > header > button:hover {
+    background-color: @bg_hover;
+    color: @text;
+}
+
+window.filechooser scrolledwindow.frame {
+    border: none;
+}
+
+/* Faixa da barra do caminho e demais contêineres, no fundo da paleta */
+window.filechooser filechooser,
+window.filechooser filechooser box,
+window.filechooser filechooser .view,
+window.filechooser actionbar,
+window.filechooser actionbar > revealer > box {
+    background-color: @bg;
+    background-image: none;
+}
+
+/* Barra de baixo (escolha do formato): só uma linha fina em cima */
+window.filechooser actionbar,
+window.filechooser actionbar:backdrop,
+window.filechooser actionbar > revealer > box,
+window.filechooser actionbar > revealer > box:backdrop {
+    border-color: @border;
+    box-shadow: none;
+}
+
+window.filechooser actionbar > revealer > box {
+    border-top: 1px solid @border;
+}
+
+window.filechooser dropdown > button,
+window.filechooser dropdown > button:backdrop {
+    background-color: @bg;
+    border: 1px solid @border;
+}
+
+/* ─── Menus e sugestões ──────────────────────────────────── */
+window.dialog popover > contents,
+window.filechooser popover > contents,
+window.dialog popover > arrow,
+window.filechooser popover > arrow {
+    background-color: @bg;
+    border: 1px solid @border;
+    color: @text;
+}
+
+window.dialog popover modelbutton:hover,
+window.filechooser popover modelbutton:hover,
+window.filechooser popover row:hover {
+    background-color: @bg_hover;
+}
+
+/* ─── Barras de rolagem ──────────────────────────────────── */
+window.dialog scrollbar slider,
+window.filechooser scrollbar slider {
+    background-color: @border;
+    border: none;
+    border-radius: 3px;
+}
+
+window.dialog scrollbar slider:hover,
+window.filechooser scrollbar slider:hover {
+    background-color: @text_dim;
+}

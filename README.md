@@ -22,9 +22,13 @@ cd ~/.dotfiles
 ./install.sh
 ```
 
+## Quickshell
+
+Nesta branch, a barra, o lançador de apps, o menu de energia, as notificações, a tela de bloqueio e o indicador de volume e brilho são feitos no [Quickshell](https://quickshell.org), no lugar da waybar, do wofi, do mako e do hyprlock. Ele fica no AUR, e o instalador usa o `yay` ou o `paru` para instalá-lo; sem um deles, instale o Quickshell à mão antes de rodar o instalador.
+
 ## Idiomas
 
-Os textos dos menus e da waybar seguem o idioma do sistema. Os idiomas disponíveis são 10:
+Os textos dos menus e da barra seguem o idioma do sistema. Os idiomas disponíveis são 10:
 
 | Idioma | Nome nativo | Código |
 | --- | --- | --- |

@@ -20,13 +20,14 @@ readonly BACKUP_DIR="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 readonly CONFIG_DIR="$HOME/.config"
 
 readonly PKGS=(
-    hyprland waybar foot thunar wofi mako hyprpaper
+    hyprland foot thunar hyprpaper libnotify
     playerctl brightnessctl wireplumber pipewire
-    ttf-jetbrains-mono-nerd ttf-font-awesome git rsync
+    ttf-jetbrains-mono-nerd git rsync
     papirus-icon-theme noto-fonts-emoji
     noto-fonts noto-fonts-cjk
-    hyprlock qt5-wayland qt6-wayland dconf
+    qt5-wayland qt6-wayland dconf
     gtk3 xdg-user-dirs
+    xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
 )
 
 # ─── 1. Verificar pré-requisitos ─────────────────────────────
@@ -63,6 +64,28 @@ install_packages() {
     else
         ok "Todos os pacotes já estão instalados."
     fi
+
+    install_quickshell
+}
+
+# A barra, os menus, as notificações e a tela de bloqueio são feitos no
+# Quickshell, que fica no AUR: usa o pacman se ele já estiver nos
+# repositórios oficiais, senão o yay ou o paru
+install_quickshell() {
+    if pacman -Qi quickshell &>/dev/null; then
+        ok "Quickshell já está instalado."
+    elif pacman -Si quickshell &>/dev/null; then
+        sudo pacman -S --needed --noconfirm quickshell
+        ok "Quickshell instalado."
+    elif command -v yay &>/dev/null; then
+        yay -S --needed --noconfirm quickshell
+        ok "Quickshell instalado (AUR)."
+    elif command -v paru &>/dev/null; then
+        paru -S --needed --noconfirm quickshell
+        ok "Quickshell instalado (AUR)."
+    else
+        warn "Quickshell não encontrado: instale pelo AUR (por exemplo, com o yay) para a barra, os menus e a tela de bloqueio funcionarem."
+    fi
 }
 
 # ─── 3. Backup de configs existentes ────────────────────────
@@ -70,7 +93,7 @@ backup_existing() {
     section "Backup de configs existentes"
 
     local has_backup=false
-    for dir in hypr waybar foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot hyprpaper colors gtk-3.0 gtk-4.0 xdg-desktop-portal; do
         local target="$CONFIG_DIR/$dir"
         if [[ -e "$target" ]]; then
             mkdir -p "$BACKUP_DIR"
@@ -93,17 +116,15 @@ copy_config() {
 
     mkdir -p "$CONFIG_DIR"
 
-    for dir in hypr waybar foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot hyprpaper colors gtk-3.0 gtk-4.0 xdg-desktop-portal; do
         local src="$REPO_DIR/.config/$dir"
         local dst="$CONFIG_DIR/$dir"
 
         if [[ -d "$src" ]]; then
             # Sincroniza no lugar (sem apagar a pasta) para o autoreload do
             # Hyprland nunca encontrar a config ausente no meio da cópia.
-            # Ficam de fora arquivos gerados ou pessoais (idioma do waybar,
-            # favoritos do Thunar/GTK)
+            # Ficam de fora arquivos pessoais (favoritos do Thunar/GTK)
             rsync -a --delete \
-                --exclude "i18n/current.jsonc" \
                 --exclude "/bookmarks" \
                 "$src/" "$dst/"
             ok "Copiado: $dir"
@@ -187,7 +208,6 @@ post_install() {
     section "Ajustes finais"
 
     chmod +x "$REPO_DIR/install.sh"
-    mkdir -p "$HOME/Pictures/screenshots"
 
     # Tema GTK: no Wayland os apps leem o gsettings, não o settings.ini
     if command -v gsettings &>/dev/null; then
@@ -205,9 +225,14 @@ post_install() {
     # Aplica a config na sessão atual, se o Hyprland estiver rodando
     if [[ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then
         hyprctl reload >/dev/null
-        pkill -x waybar || true
-        setsid -f "$CONFIG_DIR/waybar/launch.sh" >/dev/null 2>&1
-        ok "Hyprland e Waybar recarregados."
+        # O mako, se ainda estiver rodando, ocupa o serviço de notificações
+        pkill -x mako || true
+        pkill -x quickshell || true
+        setsid -f quickshell >/dev/null 2>&1
+        # Os portais só leem a escolha da janela de arquivos e o tema (gtk.css)
+        # ao iniciar. O portal GTK é quem desenha a janela de salvar
+        systemctl --user try-restart xdg-desktop-portal-gtk.service xdg-desktop-portal.service 2>/dev/null || true
+        ok "Hyprland, Quickshell e portal recarregados."
     fi
 
     ok "Instalação concluída."
@@ -221,7 +246,7 @@ summary() {
     log ""
     log "Para testar:"
     log "  ${BLUE}hyprctl reload${NC}"
-    log "  ${BLUE}killall -SIGUSR2 waybar${NC}"
+    log "  ${BLUE}pkill -x quickshell; setsid -f quickshell${NC}"
     log ""
     log "Se algo deu errado, restaure o backup:"
     log "  ${BLUE}cp -r $BACKUP_DIR/* ~/.config/${NC}"
