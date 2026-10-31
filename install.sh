@@ -20,7 +20,7 @@ readonly BACKUP_DIR="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 readonly CONFIG_DIR="$HOME/.config"
 
 readonly PKGS=(
-    hyprland foot thunar mako hyprpaper
+    hyprland foot thunar hyprpaper libnotify
     playerctl brightnessctl wireplumber pipewire
     ttf-jetbrains-mono-nerd ttf-font-awesome git rsync
     papirus-icon-theme noto-fonts-emoji
@@ -91,7 +91,7 @@ backup_existing() {
     section "Backup de configs existentes"
 
     local has_backup=false
-    for dir in hypr quickshell foot mako hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot hyprpaper colors dotfiles gtk-3.0; do
         local target="$CONFIG_DIR/$dir"
         if [[ -e "$target" ]]; then
             mkdir -p "$BACKUP_DIR"
@@ -114,7 +114,7 @@ copy_config() {
 
     mkdir -p "$CONFIG_DIR"
 
-    for dir in hypr quickshell foot mako hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot hyprpaper colors dotfiles gtk-3.0; do
         local src="$REPO_DIR/.config/$dir"
         local dst="$CONFIG_DIR/$dir"
 
@@ -224,6 +224,8 @@ post_install() {
     # Aplica a config na sessão atual, se o Hyprland estiver rodando
     if [[ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then
         hyprctl reload >/dev/null
+        # O mako, se ainda estiver rodando, ocupa o serviço de notificações
+        pkill -x mako || true
         pkill -x quickshell || true
         setsid -f quickshell >/dev/null 2>&1
         ok "Hyprland e Quickshell recarregados."

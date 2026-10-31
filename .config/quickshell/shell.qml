@@ -1,8 +1,8 @@
 import Quickshell
 import QtQuick
 
-// Quickshell entry point: one bar on each screen, and the menus, which open
-// on the focused screen (see Menu.qml)
+// Quickshell entry point: one bar on each screen, and the menus and the
+// notifications, which show on the focused screen
 ShellRoot {
     Variants {
         model: Quickshell.screens
@@ -12,4 +12,5 @@ ShellRoot {
 
     Launcher {}
     PowerMenu {}
+    Notifications {}
 }
