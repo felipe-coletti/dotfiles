@@ -6,11 +6,38 @@ window.thunar {
     color: @text;
 }
 
-/* Barra de ferramentas e caminho */
-window.thunar toolbar,
-window.thunar .toolbar {
+/* Barras do topo: menus, ferramentas e caminho. Sem foco (:backdrop) o
+   tema do sistema troca as cores delas, então os dois estados são fixados */
+window.thunar menubar,
+window.thunar menubar:backdrop,
+window.thunar headerbar,
+window.thunar headerbar:backdrop,
+window.thunar .titlebar,
+window.thunar .titlebar:backdrop {
     background-color: @bg_alt;
+    background-image: none;
+    border-color: @border;
+    box-shadow: none;
+    color: @text;
+}
+
+window.thunar menubar > menuitem {
+    color: @text_dim;
+}
+
+window.thunar menubar > menuitem:hover {
+    background-color: @bg_hover;
+    color: @text;
+}
+
+window.thunar toolbar,
+window.thunar toolbar:backdrop,
+window.thunar .toolbar,
+window.thunar .toolbar:backdrop {
+    background-color: @bg_alt;
+    background-image: none;
     border-bottom: 1px solid @border;
+    box-shadow: none;
     padding: 4px;
 }
 
@@ -39,6 +66,12 @@ window.thunar entry {
 
 window.thunar entry:focus {
     border-color: @text;
+}
+
+window.thunar entry:backdrop {
+    background-color: @bg;
+    background-image: none;
+    color: @text_dim;
 }
 
 /* Painel lateral */
