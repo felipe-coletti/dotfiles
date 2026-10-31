@@ -22,7 +22,7 @@ readonly CONFIG_DIR="$HOME/.config"
 readonly PKGS=(
     hyprland foot thunar hyprpaper libnotify
     playerctl brightnessctl wireplumber pipewire
-    ttf-jetbrains-mono-nerd ttf-font-awesome git rsync
+    ttf-jetbrains-mono-nerd git rsync
     papirus-icon-theme noto-fonts-emoji
     noto-fonts noto-fonts-cjk
     qt5-wayland qt6-wayland dconf
@@ -67,8 +67,9 @@ install_packages() {
     install_quickshell
 }
 
-# A barra é feita no Quickshell, que fica no AUR: usa o pacman se ele já
-# estiver nos repositórios oficiais, senão o yay ou o paru
+# A barra, os menus, as notificações e a tela de bloqueio são feitos no
+# Quickshell, que fica no AUR: usa o pacman se ele já estiver nos
+# repositórios oficiais, senão o yay ou o paru
 install_quickshell() {
     if pacman -Qi quickshell &>/dev/null; then
         ok "Quickshell já está instalado."
@@ -82,7 +83,7 @@ install_quickshell() {
         paru -S --needed --noconfirm quickshell
         ok "Quickshell instalado (AUR)."
     else
-        warn "Quickshell não encontrado: instale pelo AUR (por exemplo, com o yay) para a barra aparecer."
+        warn "Quickshell não encontrado: instale pelo AUR (por exemplo, com o yay) para a barra, os menus e a tela de bloqueio funcionarem."
     fi
 }
 
@@ -91,7 +92,7 @@ backup_existing() {
     section "Backup de configs existentes"
 
     local has_backup=false
-    for dir in hypr quickshell foot hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot hyprpaper colors gtk-3.0; do
         local target="$CONFIG_DIR/$dir"
         if [[ -e "$target" ]]; then
             mkdir -p "$BACKUP_DIR"
@@ -114,7 +115,7 @@ copy_config() {
 
     mkdir -p "$CONFIG_DIR"
 
-    for dir in hypr quickshell foot hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot hyprpaper colors gtk-3.0; do
         local src="$REPO_DIR/.config/$dir"
         local dst="$CONFIG_DIR/$dir"
 
@@ -206,7 +207,6 @@ post_install() {
     section "Ajustes finais"
 
     chmod +x "$REPO_DIR/install.sh"
-    mkdir -p "$HOME/Pictures/screenshots"
 
     # Tema GTK: no Wayland os apps leem o gsettings, não o settings.ini
     if command -v gsettings &>/dev/null; then

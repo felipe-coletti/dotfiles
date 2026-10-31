@@ -2,8 +2,8 @@ import Quickshell
 import Quickshell.Wayland
 import QtQuick
 
-// What the lock screen shows on each monitor, in the layout of the old
-// hyprlock.conf: time, date, user and the password field
+// What the lock screen shows on each monitor: time, date, user and the
+// password field
 WlSessionLockSurface {
     id: surface
 
@@ -16,7 +16,7 @@ WlSessionLockSurface {
         precision: SystemClock.Minutes
     }
 
-    // Hides the mouse cursor, like hyprlock's hide_cursor
+    // Hides the mouse cursor
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.BlankCursor

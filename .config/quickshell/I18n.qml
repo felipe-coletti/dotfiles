@@ -3,7 +3,7 @@ pragma Singleton
 import Quickshell
 import QtQuick
 
-// Shell texts in the 10 languages. The language is chosen like lang.sh does:
+// Shell texts in the 10 languages. The language is chosen from the system's:
 // exact language, then the same language from another region, then en_US
 Singleton {
     readonly property var languages: ({

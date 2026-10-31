@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 
 // The status bar: workspaces on the left, the clock in the middle and the
-// status icons on the right, like the waybar it replaces
+// status icons on the right
 PanelWindow {
     id: bar
 

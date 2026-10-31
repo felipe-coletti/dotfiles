@@ -3,7 +3,7 @@ import Quickshell.Hyprland
 import QtQuick
 
 // Workspaces as carousel dots, in order (1, 2, 3...). Workspaces 1-3 are
-// always shown, like waybar's persistent workspaces.
+// always shown, even when they don't exist yet.
 // - active: a wider pill in the text color
 // - with windows: a filled dot; empty: just the outline
 // - urgent: a dot in the accent color

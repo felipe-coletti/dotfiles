@@ -5,9 +5,9 @@ import Quickshell.Wayland
 import QtQuick
 import QtQuick.Effects
 
-// A menu in the middle of the screen, like wofi's: a search field over a
-// list. The launcher and the power menu are built on it. It opens on the
-// focused monitor and closes with Escape or a click outside
+// A menu in the middle of the screen: a search field over a list. The
+// launcher and the power menu are built on it. It opens on the focused
+// monitor and closes with Escape or a click outside
 PanelWindow {
     id: menu
 
