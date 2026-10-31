@@ -3,11 +3,13 @@ hl.config({
     general = {
         gaps_in  = 5,
         gaps_out = 20,
+        -- A espessura é a mesma com e sem foco (senão a janela muda de
+        -- tamanho ao trocar o foco); sem foco, a borda só fica transparente
         border_size = 2,
 
         col = {
             active_border   = "rgb(d4d4d4)",
-            inactive_border = "rgb(1e1e1e)",
+            inactive_border = "rgba(00000000)",
         },
 
         resize_on_border = false,
