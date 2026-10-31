@@ -57,7 +57,9 @@ Row {
                 id: mouse
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: Hyprland.dispatch(`workspace ${button.modelData}`)
+                // With the Lua config, Hyprland takes dispatchers as Lua, like
+                // the ones in binds.lua
+                onClicked: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${button.modelData} })`)
             }
         }
     }
