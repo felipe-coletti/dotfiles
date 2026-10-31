@@ -4,7 +4,7 @@ home = os.getenv("HOME")
 -- ─── Programas ───────────────────────────────────────────────
 terminal    = "foot"
 fileManager = "thunar"
-menu        = home .. "/.config/wofi/scripts/launcher.sh"
+menu        = "quickshell ipc call launcher toggle"
 
 -- ─── Variáveis de ambiente ──────────────────────────────────
 hl.env("XCURSOR_SIZE",    "24")

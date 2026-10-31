@@ -24,7 +24,7 @@ cd ~/.dotfiles
 
 ## Quickshell
 
-Nesta branch, a barra é feita no [Quickshell](https://quickshell.org), no lugar da waybar. Ele fica no AUR, e o instalador usa o `yay` ou o `paru` para instalá-lo; sem um deles, instale o Quickshell à mão antes de rodar o instalador.
+Nesta branch, a barra, o lançador de apps e o menu de energia são feitos no [Quickshell](https://quickshell.org), no lugar da waybar e do wofi. Ele fica no AUR, e o instalador usa o `yay` ou o `paru` para instalá-lo; sem um deles, instale o Quickshell à mão antes de rodar o instalador.
 
 ## Idiomas
 

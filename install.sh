@@ -20,7 +20,7 @@ readonly BACKUP_DIR="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 readonly CONFIG_DIR="$HOME/.config"
 
 readonly PKGS=(
-    hyprland foot thunar wofi mako hyprpaper
+    hyprland foot thunar mako hyprpaper
     playerctl brightnessctl wireplumber pipewire
     ttf-jetbrains-mono-nerd ttf-font-awesome git rsync
     papirus-icon-theme noto-fonts-emoji
@@ -91,7 +91,7 @@ backup_existing() {
     section "Backup de configs existentes"
 
     local has_backup=false
-    for dir in hypr quickshell foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot mako hyprpaper colors dotfiles gtk-3.0; do
         local target="$CONFIG_DIR/$dir"
         if [[ -e "$target" ]]; then
             mkdir -p "$BACKUP_DIR"
@@ -114,7 +114,7 @@ copy_config() {
 
     mkdir -p "$CONFIG_DIR"
 
-    for dir in hypr quickshell foot mako wofi hyprpaper colors dotfiles gtk-3.0; do
+    for dir in hypr quickshell foot mako hyprpaper colors dotfiles gtk-3.0; do
         local src="$REPO_DIR/.config/$dir"
         local dst="$CONFIG_DIR/$dir"
 
