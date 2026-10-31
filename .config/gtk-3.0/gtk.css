@@ -24,6 +24,34 @@ window.thunar notebook > header:backdrop {
     box-shadow: none;
 }
 
+/* Texto na cor da paleta, com e sem foco */
+window.thunar,
+window.thunar:backdrop,
+window.thunar label,
+window.thunar label:backdrop,
+window.thunar .view,
+window.thunar .view:backdrop,
+window.thunar menubar > menuitem,
+window.thunar menubar > menuitem:backdrop {
+    color: @text;
+}
+
+/* Barra do caminho: fundo escuro e borda fina */
+window.thunar entry,
+window.thunar entry:backdrop {
+    background-color: @bg;
+    background-image: none;
+    border: 1px solid @border;
+    border-radius: 4px;
+    box-shadow: none;
+    color: @text;
+    caret-color: @text;
+}
+
+window.thunar entry:focus {
+    border-color: @text;
+}
+
 /* Linhas entre as áreas */
 window.thunar toolbar {
     border-bottom: 1px solid @border;
