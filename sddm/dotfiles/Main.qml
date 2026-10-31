@@ -1,4 +1,4 @@
-// Tela de login no mesmo layout de .config/hypr/hyprlock.conf
+// Tela de login no mesmo layout da tela de bloqueio (.config/quickshell/LockSurface.qml)
 import QtQuick 2.15
 
 Rectangle {
@@ -12,7 +12,7 @@ Rectangle {
     readonly property color accent:      "#c0392b"
     readonly property string fontFamily: "JetBrainsMono Nerd Font"
 
-    // Usuário fixo (último logado), sem troca de usuário, como no hyprlock
+    // Usuário fixo (último logado), sem troca de usuário, como na tela de bloqueio
     readonly property string userName: userModel.lastUser !== ""
         ? userModel.lastUser
         : userModel.data(userModel.index(0, 0), Qt.UserRole + 1)
@@ -120,7 +120,7 @@ Rectangle {
         }
     }
 
-    // Reiniciar / desligar (o hyprlock não tem, mas no login são necessários)
+    // Reiniciar / desligar (a tela de bloqueio não tem, mas no login são necessários)
     Row {
         anchors.right: parent.right
         anchors.bottom: parent.bottom

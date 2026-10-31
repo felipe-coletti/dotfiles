@@ -145,6 +145,15 @@ Singleton {
 
     readonly property var t: pick(Qt.locale().name)
 
+    // A date in a Qt format, with AM/PM in the language when Qt writes it
+    // in English
+    function format(date, pattern) {
+        const text = date.toLocaleString(Qt.locale(), pattern);
+        if (!t.am)
+            return text;
+        return text.replace(/\b(AM|PM)\b/, date.getHours() < 12 ? t.am : t.pm);
+    }
+
     function pick(name) {
         if (languages[name])
             return languages[name];

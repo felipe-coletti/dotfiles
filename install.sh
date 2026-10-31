@@ -25,7 +25,7 @@ readonly PKGS=(
     ttf-jetbrains-mono-nerd ttf-font-awesome git rsync
     papirus-icon-theme noto-fonts-emoji
     noto-fonts noto-fonts-cjk
-    hyprlock qt5-wayland qt6-wayland dconf
+    qt5-wayland qt6-wayland dconf
     gtk3 xdg-user-dirs
 )
 

@@ -20,13 +20,6 @@ Item {
 
     // Formats the date; languages whose AM/PM Qt only has in Latin letters
     // (Hindi, Bengali) set their own words in I18n
-    function format(date, pattern) {
-        const text = date.toLocaleString(Qt.locale(), pattern);
-        if (!I18n.t.am)
-            return text;
-        return text.replace(/\b(AM|PM)\b/, date.getHours() < 12 ? I18n.t.am : I18n.t.pm);
-    }
-
     SystemClock {
         id: clock
         precision: SystemClock.Minutes
@@ -35,7 +28,7 @@ Item {
     BarText {
         id: label
         anchors.centerIn: parent
-        text: root.format(clock.date, root.compact ? I18n.t.clockAlt : I18n.t.clock)
+        text: I18n.format(clock.date, root.compact ? I18n.t.clockAlt : I18n.t.clock)
     }
 
     MouseArea {

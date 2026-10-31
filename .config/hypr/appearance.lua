@@ -45,5 +45,8 @@ hl.config({
     misc = {
         force_default_wallpaper = -1,
         disable_hyprland_logo   = false,
+        -- Se o Quickshell parar com a tela bloqueada, abri-lo de novo
+        -- retoma a tela de bloqueio
+        allow_session_lock_restore = true,
     },
 })
