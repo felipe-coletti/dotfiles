@@ -29,6 +29,8 @@ hl.config({
             range        = 4,
             render_power = 3,
             color        = 0xee1a1a1a,
+            -- Sem foco, sem sombra: perto da janela ela parecia uma borda
+            color_inactive = 0x00000000,
         },
 
         blur = {
