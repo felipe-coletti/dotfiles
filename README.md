@@ -1,6 +1,6 @@
 # Dotfiles
 
-Minha configuração pessoal para **Arch Linux + Hyprland**.
+Minha configuração pessoal para **Arch Linux + Hyprland**, numa paleta escura e minimalista. A barra, o wallpaper, o lançador de apps, o menu de energia, as notificações, a tela de bloqueio e o indicador de volume e brilho são feitos no [Quickshell](https://quickshell.org); o terminal é o foot e o gerenciador de arquivos é o Thunar, os dois com a mesma paleta, assim como a tela de login (SDDM). Tudo segue o idioma do sistema, em 10 idiomas.
 
 ## Instalação
 
@@ -24,7 +24,34 @@ cd ~/.dotfiles
 
 ## Quickshell
 
-A barra, o wallpaper, o lançador de apps, o menu de energia, as notificações, a tela de bloqueio e o indicador de volume e brilho são feitos no [Quickshell](https://quickshell.org), no lugar da waybar, do hyprpaper, do wofi, do mako e do hyprlock. Ele fica no AUR, e o instalador usa o `yay` ou o `paru` para instalá-lo; sem um deles, instale o Quickshell à mão antes de rodar o instalador.
+O Quickshell fica no AUR, e o instalador usa o `yay` ou o `paru` para instalá-lo; sem um deles, instale o Quickshell à mão antes de rodar o instalador.
+
+## Atalhos
+
+`SUPER` é a tecla do Windows.
+
+| Teclas | Ação |
+| --- | --- |
+| `SUPER + Enter` | Abrir o terminal (foot) |
+| `SUPER + D` | Abrir o lançador de apps |
+| `SUPER + E` | Abrir o gerenciador de arquivos (Thunar) |
+| `SUPER + Q` | Fechar a janela (sem janela aberta: menu de energia) |
+| `SUPER + L` | Bloquear a tela |
+| `SUPER + V` | Alternar janela flutuante |
+| `SUPER + P` | Alternar pseudo-tiling |
+| `SUPER + J` | Alternar a direção da divisão |
+| `SUPER + setas` | Mover o foco |
+| `SUPER + 1…0` | Ir para o workspace 1–10 |
+| `SUPER + SHIFT + 1…0` | Mover a janela para o workspace 1–10 |
+| `SUPER + TAB` | Mostrar ou esconder o scratchpad |
+| `SUPER + SHIFT + TAB` | Mover a janela para o scratchpad |
+| `SUPER + roda do mouse` | Trocar de workspace |
+| `SUPER + arrastar com o botão esquerdo` | Mover a janela |
+| `SUPER + arrastar com o botão direito` | Redimensionar a janela |
+| `SUPER + PRINT` | Captura da tela inteira |
+| `SUPER + SHIFT + PRINT` | Captura de uma área |
+
+As capturas vão para a pasta de imagens do idioma do sistema (`~/Imagens` em português). As teclas de volume, brilho e mídia do teclado também funcionam, inclusive com a tela bloqueada.
 
 ## Wallpaper
 
