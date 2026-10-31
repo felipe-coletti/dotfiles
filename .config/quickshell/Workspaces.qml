@@ -2,9 +2,14 @@ import Quickshell
 import Quickshell.Hyprland
 import QtQuick
 
-// Workspaces 1-3 are always shown, like waybar's persistent workspaces;
-// the active one is underlined
-Row {
+// Workspaces as carousel dots, in order (1, 2, 3...). Workspaces 1-3 are
+// always shown, like waybar's persistent workspaces.
+// - active: a wider pill in the text color
+// - with windows: a filled dot; empty: just the outline
+// - urgent: a dot in the accent color
+// Click a dot to go to it (its number shows on hover); scroll over the dots
+// to go to the next or previous one, like SUPER + scroll
+Item {
     id: root
 
     required property var screen
@@ -21,45 +26,80 @@ Row {
         return Array.from(ids).sort((a, b) => a - b);
     }
 
-    spacing: 4
+    // With the Lua config, Hyprland takes dispatchers as Lua, like the ones
+    // in binds.lua
+    function goTo(target) {
+        Hyprland.dispatch(`hl.dsp.focus({ workspace = ${JSON.stringify(target)} })`);
+    }
 
-    Repeater {
-        model: root.ids
+    implicitWidth: dots.implicitWidth
+    implicitHeight: 24
 
-        Rectangle {
-            id: button
+    Row {
+        id: dots
 
-            required property int modelData
-            readonly property var workspace: root.workspaces.find(w => w.id === modelData)
-            readonly property bool active: modelData === root.activeId
-            readonly property bool highlighted: active || (workspace?.urgent ?? false)
+        anchors.verticalCenter: parent.verticalCenter
 
-            width: label.implicitWidth + 16
-            height: 24
-            color: mouse.containsMouse && !highlighted ? Theme.bgHover : "transparent"
+        Repeater {
+            model: root.ids
 
-            BarText {
-                id: label
-                anchors.centerIn: parent
-                text: button.workspace?.name ?? button.modelData
-                color: button.highlighted || mouse.containsMouse ? Theme.text : Theme.textDim
-            }
+            // The whole slot takes the click, not only the dot
+            Item {
+                id: slot
 
-            Rectangle {
-                visible: button.highlighted
-                anchors.bottom: parent.bottom
-                width: parent.width
-                height: 2
-                color: Theme.text
-            }
+                required property int modelData
+                readonly property var workspace: root.workspaces.find(w => w.id === modelData)
+                readonly property bool active: modelData === root.activeId
+                // Hyprland only keeps empty workspaces while they're active
+                readonly property bool occupied: !!workspace
+                readonly property bool urgent: workspace?.urgent ?? false
 
-            MouseArea {
-                id: mouse
-                anchors.fill: parent
-                hoverEnabled: true
-                // With the Lua config, Hyprland takes dispatchers as Lua, like
-                // the ones in binds.lua
-                onClicked: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${button.modelData} })`)
+                width: dot.width + 8
+                height: root.implicitHeight
+
+                Rectangle {
+                    id: dot
+
+                    anchors.centerIn: parent
+                    width: slot.active ? 18 : 8
+                    height: 8
+                    radius: height / 2
+                    color: slot.active ? Theme.text
+                        : slot.urgent ? Theme.accent
+                        : !slot.occupied ? "transparent"
+                        : mouse.containsMouse ? Theme.text
+                        : Theme.textDim
+                    border.width: slot.active || slot.urgent || slot.occupied ? 0 : 1
+                    border.color: mouse.containsMouse ? Theme.text : Theme.textDim
+
+                    Behavior on width {
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
+                }
+
+                MouseArea {
+                    id: mouse
+
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: root.goTo(slot.modelData)
+                    onWheel: event => root.goTo(event.angleDelta.y > 0 ? "e-1" : "e+1")
+                }
+
+                Tooltip {
+                    target: slot
+                    text: slot.workspace?.name ?? String(slot.modelData)
+                    shown: mouse.containsMouse
+                }
             }
         }
     }
