@@ -145,7 +145,7 @@ PanelWindow {
                 BarText {
                     anchors.verticalCenter: parent.verticalCenter
                     visible: input.text === ""
-                    text: menu.placeholder.toUpperCase()
+                    text: menu.placeholder
                     color: Theme.textDim
                     font.pixelSize: 14
                 }
@@ -175,22 +175,29 @@ PanelWindow {
             boundsBehavior: Flickable.StopAtBounds
             highlightMoveDuration: 0
 
-            delegate: Rectangle {
+            // The list sets the position of each row, so the side margins
+            // go inside it, on the highlight
+            delegate: Item {
                 id: row
 
                 required property var modelData
                 required property int index
                 readonly property bool selected: index === menu.current
 
-                x: 10
-                width: list.width - 20
+                width: list.width
                 height: 32
-                radius: 4
-                color: selected ? Theme.bgHover : "transparent"
+
+                Rectangle {
+                    anchors.fill: parent
+                    anchors.leftMargin: 10
+                    anchors.rightMargin: 10
+                    radius: 4
+                    color: row.selected ? Theme.bgHover : "transparent"
+                }
 
                 Row {
                     anchors.left: parent.left
-                    anchors.leftMargin: 8
+                    anchors.leftMargin: 18
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 10
 
@@ -217,7 +224,7 @@ PanelWindow {
                         anchors.verticalCenter: parent.verticalCenter
                         text: row.modelData.label
                         color: row.selected ? Theme.text : Theme.textDim
-                        width: row.width - 60
+                        width: row.width - 80
                         elide: Text.ElideRight
                     }
                 }
