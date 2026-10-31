@@ -3,14 +3,9 @@ hl.config({
     general = {
         gaps_in  = 5,
         gaps_out = 20,
-        -- A espessura é a mesma com e sem foco (senão a janela muda de
-        -- tamanho ao trocar o foco); sem foco, a borda só fica transparente
-        border_size = 2,
-
-        col = {
-            active_border   = "rgb(d4d4d4)",
-            inactive_border = "rgba(00000000)",
-        },
+        -- Sem borda: as janelas se destacam pela sombra. A espessura é a
+        -- mesma (zero) com e sem foco, então nada muda de tamanho
+        border_size = 0,
 
         resize_on_border = false,
         allow_tearing    = false,
@@ -18,19 +13,19 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 4,
+        rounding       = 8,
         rounding_power = 2,
 
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
 
+        -- Sombra suave em volta das janelas, mais forte na que tem foco
         shadow = {
-            enabled      = true,
-            range        = 4,
-            render_power = 3,
-            color        = 0xee1a1a1a,
-            -- Sem foco, sem sombra: perto da janela ela parecia uma borda
-            color_inactive = 0x00000000,
+            enabled        = true,
+            range          = 16,
+            render_power   = 3,
+            color          = 0x66000000,
+            color_inactive = 0x33000000,
         },
 
         blur = {
