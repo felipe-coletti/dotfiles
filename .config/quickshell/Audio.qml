@@ -11,10 +11,7 @@ BarItem {
     readonly property int volume: ready ? Math.round(sink.audio.volume * 100) : 0
     readonly property bool muted: ready && sink.audio.muted
     readonly property bool headphones: /head(phone|set)/i.test(sink?.description ?? "")
-    readonly property string icon: headphones ? "󰋋"
-        : volume < 34 ? "󰕿"
-        : volume < 67 ? "󰖀"
-        : "󰕾"
+    readonly property string icon: Icons.volume(volume, false, headphones)
 
     visible: ready
     text: muted ? `󰝟 ${I18n.t.muted}` : `${icon} ${volume}%`
