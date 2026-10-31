@@ -1,111 +1,39 @@
+/* Thunar só com o fundo mais escuro da paleta e linhas finas separando as
+   áreas. O resto (botões, seleção, menus, diálogos) fica com o Adwaita escuro */
 @import url("../colors/palette.css");
 
-/* ─── Thunar ──────────────────────────────────────────────── */
-window.thunar {
-    background-color: @bg;
-    color: @text;
-}
-
-/* Barras do topo: menus, ferramentas e caminho. Sem foco (:backdrop) o
-   tema do sistema troca as cores delas, então os dois estados são fixados */
+/* Fundo de todas as áreas, com e sem foco */
+window.thunar,
+window.thunar:backdrop,
 window.thunar menubar,
 window.thunar menubar:backdrop,
-window.thunar headerbar,
-window.thunar headerbar:backdrop,
-window.thunar .titlebar,
-window.thunar .titlebar:backdrop {
-    background-color: @bg_alt;
-    background-image: none;
-    border-color: @border;
-    box-shadow: none;
-    color: @text;
-}
-
-window.thunar menubar > menuitem {
-    color: @text_dim;
-}
-
-window.thunar menubar > menuitem:hover {
-    background-color: @bg_hover;
-    color: @text;
-}
-
 window.thunar toolbar,
 window.thunar toolbar:backdrop,
-window.thunar .toolbar,
-window.thunar .toolbar:backdrop {
-    background-color: @bg_alt;
-    background-image: none;
-    border-bottom: 1px solid @border;
-    box-shadow: none;
-    padding: 4px;
-}
-
-window.thunar button {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    border-radius: 4px;
-    color: @text_dim;
-}
-
-window.thunar button:hover,
-window.thunar button:checked {
-    background-color: @bg_hover;
-    color: @text;
-}
-
-window.thunar entry {
-    background-color: @bg;
-    color: @text;
-    caret-color: @text;
-    border: 1px solid @border;
-    border-radius: 4px;
-    box-shadow: none;
-}
-
-window.thunar entry:focus {
-    border-color: @text;
-}
-
-window.thunar entry:backdrop {
-    background-color: @bg;
-    background-image: none;
-    color: @text_dim;
-}
-
-/* Painel lateral */
 window.thunar .sidebar,
-window.thunar .sidebar .view {
-    background-color: @bg_alt;
-    color: @text_dim;
-}
-
-/* Lista e ícones de arquivos */
+window.thunar .sidebar:backdrop,
+window.thunar .sidebar .view,
+window.thunar .sidebar .view:backdrop,
 window.thunar .view,
-window.thunar treeview,
-window.thunar iconview {
+window.thunar .view:backdrop,
+window.thunar statusbar,
+window.thunar statusbar:backdrop,
+window.thunar notebook > header,
+window.thunar notebook > header:backdrop {
     background-color: @bg;
-    color: @text;
+    background-image: none;
+    box-shadow: none;
 }
 
-window.thunar .view:selected,
-window.thunar treeview:selected,
-window.thunar iconview:selected,
-window.thunar .sidebar .view:selected {
-    background-color: @bg_hover;
-    color: @text;
-}
-
-window.thunar treeview header button {
-    background-color: @bg_alt;
+/* Linhas entre as áreas */
+window.thunar toolbar {
     border-bottom: 1px solid @border;
-    color: @text_dim;
 }
 
-/* Divisória e barra de status */
-/* A divisória é mais larga que a linha visível: fundo transparente e só a
-   borda de 1px, senão sobra um bloco ao lado da barra de status */
+window.thunar statusbar {
+    border-top: 1px solid @border;
+    margin: 0;
+}
+
 window.thunar paned > separator {
     background-color: transparent;
     background-image: none;
@@ -114,344 +42,9 @@ window.thunar paned > separator {
     min-width: 1px;
 }
 
-window.thunar statusbar {
-    background-color: @bg_alt;
-    border-top: 1px solid @border;
-    color: @text_dim;
-    margin: 0;
-}
-
-/* Bordas que vêm do Adwaita. A moldura da lista de arquivos dobraria as
-   linhas da divisória, da barra de ferramentas e da barra de status */
+/* Sem as bordas do Adwaita, que dobrariam as linhas acima */
 window.thunar scrolledwindow,
 window.thunar scrolledwindow.frame,
 window.thunar frame > border {
     border: none;
-}
-
-/* Abas (CTRL + T) */
-window.thunar notebook,
-window.thunar notebook > header,
-window.thunar notebook > stack {
-    border-color: @border;
-}
-
-window.thunar notebook > header {
-    background-color: @bg_alt;
-    box-shadow: none;
-}
-
-window.thunar notebook > header tab {
-    color: @text_dim;
-}
-
-window.thunar notebook > header tab:checked {
-    box-shadow: inset 0 -2px @text;
-    color: @text;
-}
-
-window.thunar scrollbar {
-    background: transparent;
-    border: none;
-}
-
-window.thunar scrollbar slider {
-    background-color: @bg_hover;
-    border-radius: 3px;
-    min-width: 6px;
-    min-height: 6px;
-}
-
-/* ─── Menus de contexto (todos os apps GTK) ──────────────── */
-menu,
-.menu,
-.context-menu {
-    background-color: @bg_alt;
-    border: 1px solid @border;
-    border-radius: 4px;
-    color: @text;
-    padding: 4px 0;
-}
-
-menu menuitem:hover,
-.menu menuitem:hover {
-    background-color: @bg_hover;
-}
-
-menu menuitem:disabled label,
-.menu menuitem:disabled label {
-    color: @text_dim;
-}
-
-menu separator,
-.menu separator {
-    background-color: @border;
-    margin: 4px 0;
-}
-
-/* ─── Diálogos (todos os apps GTK) ───────────────────────── */
-/* Confirmações, conflito de arquivos, propriedades, renomear, progresso e a
-   janela de abrir/salvar (que os navegadores também usam nos downloads) */
-messagedialog.background,
-dialog.background,
-messagedialog .titlebar,
-dialog headerbar {
-    background-color: @bg;
-    background-image: none;
-    color: @text;
-}
-
-/* A borda da janela vem do Hyprland */
-messagedialog decoration,
-dialog decoration {
-    box-shadow: none;
-}
-
-messagedialog .titlebar,
-dialog headerbar {
-    border: none;
-    border-bottom: 1px solid @border;
-    box-shadow: none;
-}
-
-messagedialog label,
-dialog label {
-    color: @text;
-}
-
-messagedialog label.dim-label,
-dialog label.dim-label {
-    color: @text_dim;
-}
-
-/* Botões */
-messagedialog .dialog-action-box,
-dialog .dialog-action-box {
-    border: none;
-    padding: 12px;
-}
-
-messagedialog button,
-dialog button {
-    background-color: @bg_alt;
-    background-image: none;
-    border: 1px solid @border;
-    border-radius: 4px;
-    box-shadow: none;
-    color: @text;
-    margin: 0 3px;
-    padding: 6px 12px;
-    text-shadow: none;
-}
-
-messagedialog button:hover,
-dialog button:hover,
-messagedialog button:checked,
-dialog button:checked {
-    background-color: @bg_hover;
-}
-
-/* O botão do Enter ganha só a borda clara */
-messagedialog button.default,
-dialog button.default {
-    border-color: @text;
-}
-
-/* A ação principal (Salvar, Substituir…) em destaque, invertida */
-messagedialog button.suggested-action,
-dialog button.suggested-action {
-    background-color: @text;
-    border-color: @text;
-}
-
-messagedialog button.suggested-action label,
-dialog button.suggested-action label {
-    color: @bg;
-}
-
-/* Ações que apagam algo (Excluir) na cor de destaque */
-messagedialog button.destructive-action,
-dialog button.destructive-action {
-    background-color: @accent;
-    border-color: @accent;
-}
-
-messagedialog button.destructive-action:hover,
-dialog button.destructive-action:hover {
-    background-color: @accent_hover;
-}
-
-messagedialog button.destructive-action label,
-dialog button.destructive-action label {
-    color: @text;
-}
-
-messagedialog button:disabled,
-dialog button:disabled {
-    opacity: 0.4;
-}
-
-/* Campos de texto e listas suspensas */
-dialog entry,
-messagedialog entry,
-dialog combobox button.combo {
-    background-color: @bg_alt;
-    background-image: none;
-    border: 1px solid @border;
-    border-radius: 4px;
-    box-shadow: none;
-    caret-color: @text;
-    color: @text;
-}
-
-dialog entry:focus,
-messagedialog entry:focus {
-    border-color: @text;
-}
-
-dialog entry selection,
-messagedialog entry selection,
-messagedialog label selection,
-dialog label selection,
-window.thunar entry selection {
-    background-color: @bg_hover;
-    color: @text;
-}
-
-/* Abas (propriedades do arquivo) */
-dialog notebook,
-dialog notebook > header,
-dialog notebook > stack {
-    background-color: @bg;
-    border-color: @border;
-}
-
-dialog notebook > header tab {
-    color: @text_dim;
-}
-
-dialog notebook > header tab:checked {
-    box-shadow: inset 0 -2px @text;
-    color: @text;
-}
-
-/* Barras de progresso */
-progressbar trough {
-    background-color: @bg_hover;
-    border: none;
-    border-radius: 2px;
-    min-height: 4px;
-}
-
-progressbar progress {
-    background-color: @text;
-    background-image: none;
-    border: none;
-    border-radius: 2px;
-    min-height: 4px;
-}
-
-/* Caixas de seleção e botões de opção */
-dialog check,
-dialog radio,
-messagedialog check {
-    background-color: @bg_alt;
-    background-image: none;
-    border: 1px solid @border;
-    box-shadow: none;
-    color: @bg;
-}
-
-dialog check:checked,
-dialog radio:checked,
-messagedialog check:checked {
-    background-color: @text;
-    border-color: @text;
-}
-
-/* Janela de abrir/salvar */
-filechooser,
-filechooser placessidebar list,
-filechooser treeview,
-filechooser .view {
-    background-color: @bg;
-    color: @text;
-}
-
-filechooser placessidebar,
-filechooser placessidebar list {
-    background-color: @bg_alt;
-    border-right: 1px solid @border;
-}
-
-filechooser placessidebar row {
-    color: @text_dim;
-}
-
-filechooser placessidebar row:selected,
-filechooser treeview:selected,
-filechooser .view:selected {
-    background-color: @bg_hover;
-    color: @text;
-}
-
-filechooser treeview header button {
-    background-color: @bg_alt;
-    border: none;
-    border-bottom: 1px solid @border;
-    border-radius: 0;
-    color: @text_dim;
-    margin: 0;
-}
-
-filechooser paned > separator {
-    background-color: transparent;
-    background-image: none;
-    border-left: 1px solid @border;
-}
-
-filechooser .path-bar button {
-    background-color: transparent;
-    border-color: transparent;
-    margin: 0 1px;
-    padding: 2px 8px;
-}
-
-filechooser .path-bar button:checked {
-    background-color: @bg_hover;
-}
-
-dialog scrollbar {
-    background: transparent;
-    border: none;
-}
-
-dialog scrollbar slider {
-    background-color: @bg_hover;
-    border-radius: 3px;
-    min-height: 6px;
-    min-width: 6px;
-}
-
-/* ─── Janela de progresso do Thunar ──────────────────────── */
-/* Ela não tem classe própria, então toda janela GTK recebe o fundo do tema
-   (os outros apps mantêm os seus widgets, só o fundo muda) */
-window.background {
-    background-color: @bg;
-}
-
-/* Os textos e botões dela são encontrados pela estrutura exata */
-window.background > box.vertical > box.vertical:only-child > box.vertical:only-child > box.vertical:only-child > box.horizontal label {
-    color: @text;
-}
-
-window.background > box.vertical > box.vertical:only-child > box.vertical:only-child > box.vertical:only-child > box.horizontal > button.flat.image-button {
-    border: 1px solid @border;
-    border-radius: 4px;
-    color: @text;
-    margin-left: 6px;
-}
-
-window.background > box.vertical > box.vertical:only-child > box.vertical:only-child > box.vertical:only-child > box.horizontal > button.flat.image-button:hover {
-    background-color: @bg_hover;
 }
