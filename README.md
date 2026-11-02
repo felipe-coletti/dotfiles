@@ -2,6 +2,8 @@
 
 Minha configuração pessoal para **Arch Linux + Hyprland**, numa paleta escura e minimalista. A barra, o wallpaper, o lançador de apps, o menu de energia, as notificações, a tela de bloqueio e o indicador de volume e brilho são feitos no [Quickshell](https://quickshell.org); o terminal é o foot e o gerenciador de arquivos é o Thunar, os dois com a mesma paleta, assim como a tela de login (SDDM). Tudo segue o idioma do sistema, em 10 idiomas.
 
+![Desktop](screenshots/desktop.png)
+
 ## Instalação
 
 1 - Clone o repositório:
