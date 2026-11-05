@@ -1,4 +1,5 @@
 hl.on("hyprland.start", function()
     hl.exec_cmd("quickshell")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
+    hl.exec_cmd("wl-clip-persist --clipboard regular")
 end)
