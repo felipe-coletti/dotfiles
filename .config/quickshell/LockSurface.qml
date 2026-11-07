@@ -22,22 +22,22 @@ WlSessionLockSurface {
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: -120
+        anchors.verticalCenterOffset: -128
         text: I18n.format(clock.date, I18n.t.clockAlt)
         color: Theme.text
         font.family: surface.font
-        font.pointSize: 64
+        font.pixelSize: 90
     }
 
     // In the long format of the system language
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: -50
+        anchors.verticalCenterOffset: -53
         text: clock.date.toLocaleDateString(Qt.locale(), Locale.LongFormat)
         color: Theme.textDim
         font.family: surface.font
-        font.pointSize: 14
+        font.pixelSize: 20
     }
 
     Text {
@@ -49,15 +49,15 @@ WlSessionLockSurface {
         text: name ? "󰀄  " + name : "󰀄"
         color: Theme.text
         font.family: surface.font
-        font.pointSize: 13
+        font.pixelSize: 18
     }
 
     Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 40
-        width: 280
-        height: 44
+        anchors.verticalCenterOffset: 43
+        width: 296
+        height: 46
         radius: 4
         color: Theme.bgAlt
         border.width: 2
@@ -74,7 +74,7 @@ WlSessionLockSurface {
             passwordCharacter: "•"
             color: Theme.text
             font.family: surface.font
-            font.pointSize: 12
+            font.pixelSize: 17
             clip: true
             focus: true
             readOnly: surface.lock.checking
@@ -92,7 +92,7 @@ WlSessionLockSurface {
             text: "󰌾"
             color: Theme.textDim
             font.family: surface.font
-            font.pointSize: 12
+            font.pixelSize: 17
         }
     }
 

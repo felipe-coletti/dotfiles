@@ -10,7 +10,7 @@ Text {
     text: icon
     color: mouse.containsMouse ? "#d4d4d4" : "#808080"
     font.family: "JetBrainsMono Nerd Font"
-    font.pointSize: 16
+    font.pixelSize: 22
 
     MouseArea {
         id: mouse

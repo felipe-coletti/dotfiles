@@ -73,22 +73,22 @@ Rectangle {
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: -120
+        anchors.verticalCenterOffset: -128
         text: root.time(root.now)
         color: root.textColor
         font.family: root.fontFamily
-        font.pointSize: 64
+        font.pixelSize: 90
     }
 
     // Data por extenso no formato do idioma do sistema
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: -50
+        anchors.verticalCenterOffset: -53
         text: root.now.toLocaleDateString(Qt.locale(), Locale.LongFormat)
         color: root.textDim
         font.family: root.fontFamily
-        font.pointSize: 14
+        font.pixelSize: 20
     }
 
     // Usuário, com as setas para trocar quando há mais de um
@@ -108,7 +108,7 @@ Rectangle {
             text: "󰀄  " + root.userName
             color: root.textColor
             font.family: root.fontFamily
-            font.pointSize: 13
+            font.pixelSize: 18
         }
 
         UserArrow {
@@ -120,12 +120,12 @@ Rectangle {
 
     // Campo de senha
     Rectangle {
-        width: 280
-        height: 44
+        width: 296
+        height: 46
         radius: 4
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 40
+        anchors.verticalCenterOffset: 43
         color: root.bgAlt
         border.width: 2
         border.color: root.failed ? root.negative
@@ -142,7 +142,7 @@ Rectangle {
             passwordCharacter: "•"
             color: root.textColor
             font.family: root.fontFamily
-            font.pointSize: 12
+            font.pixelSize: 17
             clip: true
             focus: true
 
@@ -161,7 +161,7 @@ Rectangle {
             text: "󰌾"
             color: root.textDim
             font.family: root.fontFamily
-            font.pointSize: 12
+            font.pixelSize: 17
         }
     }
 
